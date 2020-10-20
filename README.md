@@ -1,5 +1,11 @@
-xJavascript for PHP Geeks Tutorial
+Javascript for PHP Geeks Tutorial
 =================================
+
+# Notes
+
+### admin
+
+    ron_furgandy:pumpup
 
 This repository holds the screencast code, script and all the AJAX
 you can eat for the [Modern JavaScript Tutorials](http://knpuniversity.com/tracks/javascript#modern-javascript)
