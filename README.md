@@ -1,4 +1,4 @@
-Javascript for PHP Geeks Tutorial
+xJavascript for PHP Geeks Tutorial
 =================================
 
 This repository holds the screencast code, script and all the AJAX
