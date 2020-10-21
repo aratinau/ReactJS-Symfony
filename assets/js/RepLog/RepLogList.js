@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 
 // this is Dumb Component
 export default function RepLogList(props) {
@@ -26,4 +27,9 @@ export default function RepLogList(props) {
             ))}
         </tbody>
     )
+}
+
+RepLogList.propTypes = {
+    highlightedRowId: PropTypes.any,
+    onRowClick: PropTypes.func
 }

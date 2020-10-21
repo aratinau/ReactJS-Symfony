@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import RepLogs from "./RepLogs";
+import PropTypes from 'prop-types';
 
 // this is Smart Component
 export default class RepLogApp extends Component {
@@ -27,4 +28,8 @@ export default class RepLogApp extends Component {
             onRowClick={this.handleRowClick}
         />
     }
+}
+
+RepLogApp.propTypes = {
+    withHeart: PropTypes.bool
 }
