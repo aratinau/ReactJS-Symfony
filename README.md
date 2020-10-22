@@ -3,6 +3,23 @@ Javascript for PHP Geeks Tutorial
 
 # Notes
 
+## Naming convention
+
+methods `handleSomeEvent`
+
+props `onSomeEvent`
+
+```jsx
+handleNewItemSubmit(event)
+{
+    // ...
+}
+
+<Component
+    onNewItemSubmit={this.handleNewItemSubmit}
+/>
+```
+
 ### admin
 
     ron_furgandy:pumpup
