@@ -44,7 +44,7 @@ export default class RepLogApp extends Component {
         */
 
         /*  previous code:
-        
+
         repLogs.push(newRep)
         this.setState({
             repLogs: repLogs

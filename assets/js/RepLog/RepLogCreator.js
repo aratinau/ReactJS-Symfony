@@ -15,6 +15,10 @@ export default class RepLogCreator extends Component {
             { id: 'coffee_cup', text: 'Coffee Cup' },
         ];
 
+        this.state = {
+            quantityInputError: ''
+        };
+
         this.handleFormSubmit = this.handleFormSubmit.bind(this)
     }
 
@@ -25,6 +29,13 @@ export default class RepLogCreator extends Component {
         const quantityInput = this.quantityInput.current
         const itemSelect = this.itemSelect.current
 
+        if (quantityInput.value <= 0) {
+            this.setState({
+                quantityInputError: 'Please enter a value greater than 0'
+            });
+            return;
+        }
+
         // onNewItemSubmit est une props
         onAddRepLog(
             itemSelect.options[itemSelect.selectedIndex].text,
@@ -33,12 +44,16 @@ export default class RepLogCreator extends Component {
 
         quantityInput.value = '';
         itemSelect.selectedIndex = 0;
+
+        this.setState({
+            quantityInputError: ''
+        });
     }
 
     render() {
-
+        const { quantityInputError } = this.state;
         return (
-            <form className="form-inline" onSubmit={this.handleFormSubmit}>
+            <form onSubmit={this.handleFormSubmit}>
                 <div className="form-group">
                     <label className="sr-only control-label required"
                            htmlFor="rep_log_item">
@@ -59,7 +74,7 @@ export default class RepLogCreator extends Component {
                     </select>
                 </div>
                 {' '}
-                <div className="form-group">
+                <div className={`form-group ${quantityInputError ? 'has-error' : ''}`}>
                     <label className="sr-only control-label required"
                            htmlFor="rep_log_reps">
                         How many times?
@@ -69,6 +84,7 @@ export default class RepLogCreator extends Component {
                            required="required"
                            placeholder="How many times?"
                            className="form-control"/>
+                    {quantityInputError && <span className="help-block">{quantityInputError}</span>}
                 </div>
                 {' '}
                 <button type="submit" className="btn btn-primary">I Lifted
