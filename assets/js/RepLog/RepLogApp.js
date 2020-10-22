@@ -18,14 +18,14 @@ export default class RepLogApp extends Component {
         };
 
         this.handleRowClick = this.handleRowClick.bind(this);
-        this.handleNewItemSubmit = this.handleNewItemSubmit.bind(this);
+        this.handleAddRepLog = this.handleAddRepLog.bind(this);
     }
 
     handleRowClick(repLogId) {
         this.setState({highlightedRowId: repLogId});
     }
 
-    handleNewItemSubmit(itemLabel, reps) {
+    handleAddRepLog(itemLabel, reps) {
         const repLogs = this.state.repLogs
         const newRep = {
             id: uuid(),
@@ -33,10 +33,35 @@ export default class RepLogApp extends Component {
             itemLabel: itemLabel,
             totalWeightLifted: Math.floor(Math.random() * 50)
         }
+
+        /* NOTE
+        *  setState is asynchronous
+        *  React doesn't change state immediately
+        *  Par exemple si deux parties du code appellent setState au même moment
+        *  React va s'occuper du premier state change
+        *  re-render React
+        *  et ensuite s'occupe du second state change
+        */
+
+        /*  previous code:
+        
         repLogs.push(newRep)
         this.setState({
             repLogs: repLogs
         })
+        */
+
+        this.setState(prevState => {
+            const newRepLogs = [...prevState.repLogs, newRep]
+
+            return {repLogs: newRepLogs}
+        })
+
+        /*
+        * To keep it simple, just remember the rule:
+        * if setting new state involves you using data on this.state,
+        * pass a callback instead. Then, you'll know you're safe.
+        * */
     }
 
     render() {
@@ -50,7 +75,7 @@ export default class RepLogApp extends Component {
             {...this.props}
             {...this.state}
             onRowClick={this.handleRowClick}
-            onNewItemSubmit={this.handleNewItemSubmit}
+            onAddRepLog={this.handleAddRepLog}
         />
     }
 }
