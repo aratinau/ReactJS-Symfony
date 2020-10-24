@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import RepLogs from "./RepLogs";
 import PropTypes from 'prop-types';
 import { v4 as uuid } from 'uuid';
-import { getRepLogs } from '../api/rep_log_api';
+import {deleteRepLog, getRepLogs} from '../api/rep_log_api';
 
 // this is Smart Component
 export default class RepLogApp extends Component {
@@ -83,6 +83,8 @@ export default class RepLogApp extends Component {
     }
 
     handleDeleteRepLog(id) {
+        deleteRepLog(id);
+
         // remove the repo log without mutating state
         // filter returns a new array
         this.setState((prevState) => {
