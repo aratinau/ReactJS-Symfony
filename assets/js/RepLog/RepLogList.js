@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 // this is Dumb Component
 export default function RepLogList(props) {
-    const { highlightedRowId, onRowClick, onDeleteRepLog, repLogs, isLoaded } = props;
+    const { highlightedRowId, onRowClick, onDeleteRepLog, repLogs, isLoaded, isSavingNewRepLog } = props;
 
     const handleDeleteClick = function(event, repLogId) {
         event.preventDefault()
@@ -39,6 +39,17 @@ export default function RepLogList(props) {
                     </td>
                 </tr>
             ))}
+            {isSavingNewRepLog && (
+                <tr>
+                    <td
+                        colSpan="4"
+                        className="text-center"
+                        style={{
+                            opacity: .5
+                        }}
+                    >Lifting to the database...</td>
+                </tr>
+            )}
         </tbody>
     )
 }
@@ -48,4 +59,6 @@ RepLogList.propTypes = {
     onRowClick: PropTypes.func,
     onDeleteRepLog: PropTypes.func.isRequired,
     repLogs: PropTypes.array.isRequired,
+    isLoaded: PropTypes.bool.isRequired,
+    isSavingNewRepLog: PropTypes.bool.isRequired
 }
