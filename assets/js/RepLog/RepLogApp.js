@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import RepLogs from "./RepLogs";
 import PropTypes from 'prop-types';
 import { v4 as uuid } from 'uuid';
-import {deleteRepLog, getRepLogs} from '../api/rep_log_api';
+import {deleteRepLog, getRepLogs, createRepLog} from '../api/rep_log_api';
 
 // this is Smart Component
 export default class RepLogApp extends Component {
@@ -37,13 +37,10 @@ export default class RepLogApp extends Component {
         this.setState({highlightedRowId: repLogId});
     }
 
-    handleAddRepLog(itemLabel, reps) {
-        const repLogs = this.state.repLogs
+    handleAddRepLog(item, reps) {
         const newRep = {
-            id: uuid(),
             reps: reps,
-            itemLabel: itemLabel,
-            totalWeightLifted: Math.floor(Math.random() * 50)
+            item: item,
         }
 
         /* NOTE
@@ -63,6 +60,16 @@ export default class RepLogApp extends Component {
         })
         */
 
+        createRepLog(newRep)
+            .then(repLog => {
+                this.setState(prevState => {
+                    const newRepLogs = [...prevState.repLogs, repLog]
+
+                    return {repLogs: newRepLogs}
+                })
+            })
+
+        /*
         this.setState(prevState => {
             const newRepLogs = [...prevState.repLogs, newRep]
 

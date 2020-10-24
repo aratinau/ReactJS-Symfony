@@ -38,7 +38,7 @@ export default class RepLogCreator extends Component {
 
         // onNewItemSubmit est une props
         onAddRepLog(
-            itemSelect.options[itemSelect.selectedIndex].text,
+            itemSelect.options[itemSelect.selectedIndex].value,
             quantityInput.value
         );
 
