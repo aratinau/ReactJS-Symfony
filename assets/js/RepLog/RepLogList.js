@@ -3,12 +3,22 @@ import PropTypes from 'prop-types';
 
 // this is Dumb Component
 export default function RepLogList(props) {
-    const { highlightedRowId, onRowClick, onDeleteRepLog, repLogs } = props;
+    const { highlightedRowId, onRowClick, onDeleteRepLog, repLogs, isLoaded } = props;
 
     const handleDeleteClick = function(event, repLogId) {
         event.preventDefault()
 
         onDeleteRepLog(repLogId)
+    }
+
+    if (!isLoaded) {
+        return (
+            <tbody>
+                <tr>
+                    <td colSpan="4" className="text-center">Loading...</td>
+                </tr>
+            </tbody>
+        )
     }
 
     return (
