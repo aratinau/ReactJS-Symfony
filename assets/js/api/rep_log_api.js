@@ -3,7 +3,9 @@ function fetchJson(url, options) {
         credentials: 'same-origin',
     }, options))
         .then(response => {
-            return response.json();
+            // decode JSON, but avoid problems with empty responses
+            return response.text()
+                .then(text => text ? JSON.parse(text) : '')
         })
     ;
 }
