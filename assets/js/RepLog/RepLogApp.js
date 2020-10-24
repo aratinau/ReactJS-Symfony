@@ -15,7 +15,8 @@ export default class RepLogApp extends Component {
             numberOfHearts: 1,
             isLoaded: false,
             isSavingNewRepLog: false,
-            successMessage: ''
+            successMessage: '',
+            newRepLogValidationErrorMessage: ''
         };
 
         // empeche que si deux messages qui doivent d'afficher, le second ne disparait pas apres 1 seconde
@@ -81,10 +82,23 @@ export default class RepLogApp extends Component {
                     return {
                         repLogs: newRepLogs,
                         isSavingNewRepLog: false,
+                        newRepLogValidationErrorMessage: ''
                     }
                 })
 
                 this.setSuccessMessage('Rep Log Saved!');
+            })
+            .catch(error => {
+                error.response.json().then(errorsData => {
+                    const errors = errorsData.errors;
+
+                    // select the first key of an object
+                    const firstError = errors[Object.keys(errors)[0]];
+
+                    this.setState({
+                        newRepLogValidationErrorMessage: firstError
+                    });
+                })
             })
 
         /*
@@ -134,7 +148,7 @@ export default class RepLogApp extends Component {
                 })
             };
         });
-        
+
         deleteRepLog(id)
             .then(() => {
                 // remove the repo log without mutating state

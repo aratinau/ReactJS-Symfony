@@ -2,12 +2,22 @@ function fetchJson(url, options) {
     return fetch(url, Object.assign({
         credentials: 'same-origin',
     }, options))
+        .then(checkStatus)
         .then(response => {
             // decode JSON, but avoid problems with empty responses
             return response.text()
                 .then(text => text ? JSON.parse(text) : '')
         })
     ;
+}
+
+function checkStatus(response) {
+    if (response.status >= 200 && response.status < 400) {
+        return response;
+    }
+    const error = new Error(response.statusText);
+    error.response = response;
+    throw error
 }
 
 /**
