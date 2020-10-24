@@ -16,7 +16,7 @@ export default class RepLogApp extends Component {
             isLoaded: false,
             isSavingNewRepLog: false,
             successMessage: '',
-            newRepLogValidationErrorMessage: ''
+            newRepLogValidationErrorMessage: '',
         };
 
         // empeche que si deux messages qui doivent d'afficher, le second ne disparait pas apres 1 seconde
@@ -200,5 +200,10 @@ export default class RepLogApp extends Component {
 }
 
 RepLogApp.propTypes = {
-    withHeart: PropTypes.bool
+    withHeart: PropTypes.bool,
+    itemOptions: PropTypes.array
+}
+
+RepLogApp.defaultProps = {
+    itemOptions: []
 }
