@@ -1,6 +1,8 @@
 Javascript for PHP Geeks Tutorial
 =================================
 
+![00-react-symfony.png](./docs/00-react-symfony.png)
+
 # Notes
 
 ## Naming convention
